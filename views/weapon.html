@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<input type="button" onclick="home()" value="홈으로">
+<script>
+    function  home(){
+        location.href='/';
+    };
+$(function(){
+    battle(new Gun());
+    battle(new Cannon());
+    battle('새총');
+
+});
+    $(function(){
+      alert('최초값 100에서 '+Calc.add(100)+'50을 빼고 '+Calc.sub(50)+'2를 곱한후'+Calc.mul(2)+'10으로 나누면'+Calc.div(10)+'이다');
+    });
+   var Gun = function (){
+       this.fire = function () {
+           return '총쏘기';
+        }
+       };
+       var Cannon = function(){
+           this.fire = function() {
+               return '대포쏘기';
+           }
+       };
+       function battle(weapon){
+           if(weapon.constructor == Gun){
+               alert(weapon.fire());
+           }else if(weapon.constructor == Cannon){
+               alert(weapon.fire());
+           }else {
+               alert('발사할수가 없습니다.');
+           }
+       }
+
+
+</script>
+</body>
+</html>
