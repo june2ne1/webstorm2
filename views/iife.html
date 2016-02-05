@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>iife 진입</h1>
+<input type="button" value="계산기" onclick="calculator()">
+<!--
+즉시실행함수 표현식(IIFE, Immediately-Invoked Function Expression) 을 이용한
+모듈패턴 5가지
+-->
+<script>
+    function calculator(){
+        location.href='/calc';
+    }
+
+    $(function(){
+    alert('이름 : '+employee.name
+        +', 급여 :'+employee.paySalary()
+       +', 직책 :'+ employee.position
+       +', 보너스 :'+ employee.payBonus()
+      +', TY값 :'+ tv.getPrice()
+            +', 폰값 :'+ phone.getPrice()
+            +', 음식값 :'+ food.getPrice()
+            +', 가방값 :'+ bag.getPrice()
+    );
+    });
+    //라이브러리 모듈화를 위한 방법 1 : 기명즉시실행함수
+    var employee =(function(){
+        var name = '홍길동';
+        var gender = '남자';
+        var positon = '수식 엔지니어';
+        //salary private
+        var salary = 2000;
+        var taxSalary = 200;
+        var totalBonus = 100;
+        var taxBonus = 10;
+
+        var payBonus = function(){
+            totalBonus = totalBonus - taxBonus;
+            return totalBonus;
+        };
+        var paySalary = function(){
+            return salary - taxSalary;
+        };
+
+        //Public 속성, 메소드
+        return{
+            name : name,
+            gender : gender,
+            position : positon,
+            paySalary : paySalary,
+            payBonus : payBonus
+        };
+    }());
+
+    // 라이브러리 모듈화를 위한 방법 2 : 글로벌 객체를 파라미터로 전달
+    (function(global){
+        var root = global;
+        var food;
+        var price = '5000원';
+    if(typeof exports !=='undefined'){
+        food = exports;
+    }else {
+        food = root.food = {};
+    }
+        food.getPrice = function() {
+            return price;
+        }
+    })(this);
+
+    // 라이브러리 모듈화를 위한 방법 3 : 글로벌 객체를 내부 변수에 할당
+    (function(){
+        var phone;
+        var price = '50만원';
+        if(typeof exports !== 'undefined'){
+            phone = exports;
+        }else {
+            phone = this.phone = {};
+        }
+        phone.getPrice = function(){
+            return price;
+        }
+    })();
+
+    // 라이브러리 모듈화를 위한 방법 4 : call 함수 이용
+    (function(){
+        var bag;
+        var price = '3만원';
+        if(typeof  exports !== 'undefined'){
+            bag = exports;
+        }else {
+            bag = this.bag = {};
+        }
+        bag.getPrice = function(){
+            return price;
+        }
+
+    }).call(this);
+    // 라이브러리 모듈화를 위한 방법 5 : apply 함수 이용
+    (function(){
+        var tv;
+        var price = '100만원';
+        if(typeof  exports !== 'undefined'){
+            tv = exports;
+        }else {
+            tv = this.tv = {};
+        }
+        tv.getPrice = function(){
+            return price;
+        }
+    }).apply(this);
+
+</script>
+</body>
+</html>

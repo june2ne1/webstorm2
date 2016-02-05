@@ -7,7 +7,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var iife = require('./routes/iife');
+var calc = require('./routes/calc');
+var weapon = require('./routes/weapon');
+var prototypes = require('./routes/prototypes');
+var index = require('./routes/index');
 var app = express();
 
 // view engine setup
@@ -21,8 +25,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/',function(req,res){
+app.use('/iife',iife);
+app.use('/calc',calc);
+app.use('/weapon',weapon);
+app.use('/prototypes',prototypes);
+/*app.use('/',function(req,res){
+  res.sendfile(__dirname+'/views/index.html');
+});*/
+app.use('/',index);
+app.use('/iife',function(req,res){
   res.sendfile(__dirname+'/views/index.html');
 });
 app.use('/users', users);
